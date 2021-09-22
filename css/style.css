@@ -1,0 +1,238 @@
+/* -------------------------------------------------- */
+/* Impostazioni generali */
+/* -------------------------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #444;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    background: #C6FFDD;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #f7797d, #FBD786, #C6FFDD);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #f7797d, #FBD786, #C6FFDD); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+a {
+    color: #f7797d;
+}
+
+a:hover {
+    color: #FBD786;
+}
+
+h1, h2, h3, h4 {
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+h1 {
+    font-size: 34px;
+    font-weight: 400;
+}
+h2 {
+    font-size: 26px;
+    font-weight: 700;
+}
+h3 {
+    font-size: 22px;
+    font-weight: 400;
+}
+h4 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+}
+
+p {
+    margin: 0 0 16px 0;
+}
+
+.clearer {
+    clear: both;
+}
+
+/* Clearfix */
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+.clearfix { display: inline-block; }
+/* start commented backslash hack \*/
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+/* close commented backslash hack */
+
+.contenitore {
+    width: 980px;
+    margin: 0 auto;
+}
+
+
+
+/* -------------------------------------------------- */
+/* Pagina */
+/* -------------------------------------------------- */
+#corpo {
+    background-color: #F5F5F5;
+    padding: 30px;
+    margin: 90px 0;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.16);
+}
+
+.galleria {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.galleria a {
+    display: block;
+    text-decoration: none;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    width: 215px;
+    height: 215px;
+    overflow: hidden;
+    position: relative;
+}
+.galleria a:nth-child(4n) {
+    margin-right: 0;
+}
+
+.galleria .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    color: #ffffff;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+.galleria .overlay i {
+    position: relative;
+    top: -100px;
+    opacity: 0;
+    transition: all 0.3s 0.3s;
+}
+
+
+/* Primo elemento: B/N + Blur */
+.galleria a:nth-child(1) img {
+    filter: grayscale(100%) blur(2px);
+    transition: filter 0.3s 0.5s;
+}
+.galleria a:nth-child(1) img:hover {
+    filter: grayscale(0);
+}
+
+/* Secondo elemento: Ingrandimento */
+.galleria a:nth-child(2) img {
+    transform: scale(1);
+    transition: all 0.3s;
+}
+.galleria a:nth-child(2) img:hover {
+    transform: scale(1.2);
+}
+
+/* Terzo elemento: Rotazione */
+.galleria a:nth-child(3) img {
+    transform: scale(1) rotate(0);
+    transition: all 0.3s;
+}
+.galleria a:nth-child(3) img:hover {
+    transform: scale(1.2) rotate(360deg);
+}
+
+/* Quarto elemento: overlay */
+.galleria a:nth-child(4):hover .overlay {
+    opacity: 1;
+}
+.galleria a:nth-child(4):hover .overlay i {
+    opacity: 1;
+    top: 0;
+}
+
+
+
+
+#footer {
+    color: #ffffff;
+    font-weight: 700;
+    transform: rotate(-90deg) translateX(-50%);
+    transform-origin: 0 0;
+    position: fixed;
+    left: 10px;
+    top: 50%;
+}
+
+#box {
+    width: 100px;
+    height: 100px;
+    border-radius: 5px;
+    background-color: #f7797d;
+}
+
+#box.start {
+    animation: muovi-advance 3s infinite alternate;
+}
+
+td:last-child,
+th:last-child {
+    text-align: right;
+}
+
+.profilo {
+    width: 150px;
+    height: 150px;
+    margin-top: 30px;
+    border-radius: 75px;
+    overflow: hidden;
+}
+
+
+#box-contatto {
+    width: 600px;
+    padding: 60px;
+    background-color: #ffffff;
+    margin: 90px auto;
+}
+
+#box-contatto h1 {
+    text-align: center;
+}
+
+#box-contatto .avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 30px auto;
+    border: 1px solid #ccc;
+}
+
+#box-contatto .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.form-group label {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 0;
+}
