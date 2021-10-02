@@ -1,8 +1,6 @@
 
 <?php 
-include "variables.php";
-include "layout.php";
-include "contatti.php";
+include "includes.php";
 
 ?>
 <!DOCTYPE html>

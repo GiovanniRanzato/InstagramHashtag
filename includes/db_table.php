@@ -2,6 +2,7 @@
 class DBTable {
     public static $databaseTable;
     public static $primaryKey;
+    public static $attributes;
 
     private static function connect(){
         // Create connection
@@ -69,5 +70,58 @@ class DBTable {
 
         $conn->close();
         return $data;
+    }
+
+    public static function save($values) {
+        $id = $values[static::$primaryKey] ?? "";
+        $result = "";
+        if ($id) {
+            $result = self::update($values);
+        } else {
+            $result = self::create($values);
+        }
+        return $result;
+    }
+
+    public static function create($values) {
+        $conn = self::connect();
+        $keys = array_keys(static::$attributes);
+        unset( $values[static::$primaryKey] );
+        $values = " NULL, '".implode("' , '",$values)."'";
+        
+        $sql = "INSERT INTO ".static::$databaseTable." ( ". implode(" , ", $keys) .") VALUES ( $values )";
+        $result = $conn->query($sql);
+
+        return $result;
+    }
+
+    public static function update($values) {
+        $conn = self::connect();
+        $update = []; 
+        $keys = array_keys(static::$attributes);
+        
+        $id = "";
+        foreach ( $keys as $key ) {
+            if ($key == static::$primaryKey) {
+                 $id = $values[$key] ?? "";
+                 continue;
+            }
+            $value = $values[$key] ?? "";
+            $update []= "$key = '$value' ";
+        }
+        if(!$id){
+            return false;
+        }
+        $sql = "UPDATE ".static::$databaseTable." SET ". implode(", ", $update ). " WHERE ".static::$primaryKey."=$id";
+        $result = $conn->query($sql);
+
+        return $result;
+    }
+
+    public static function delete($id) {
+        $conn = self::connect();    
+        $sql = "DELETE FROM ".static::$databaseTable." WHERE ".static::$primaryKey."=$id";
+        $result = $conn->query($sql);
+        return $result;
     }
 }

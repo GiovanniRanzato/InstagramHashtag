@@ -58,6 +58,7 @@ function printInput($props)
         case "submit": ?>
                 <div class="mt-3">
                 <input 
+                name="<?php echo $name?>" 
                 type="<?php echo $type?>" 
                 class="btn btn-primary" 
                 value="<?php echo $value?>" >
@@ -78,6 +79,14 @@ function printInput($props)
                 <?php echo $label?>
             </label>
             </div>
+        <?php break;
+        case "hidden":
+            ?>
+            <input 
+                type="<?php echo $type?>"
+                value="<?php echo $value?>"
+                name="<?php echo $name?>"
+            >
         <?php break;
         case "file":
         case "text":

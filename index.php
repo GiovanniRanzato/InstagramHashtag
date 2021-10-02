@@ -1,14 +1,19 @@
 <?php 
 include "includes/header.php"; 
 
-$contatti = Contatti::findAll();
+$contatti = Contatto::findAll();
+$message = Message::get();
 
 ?>
+
+
 <div class="container">
     <div id="corpo">
         <h1>Rubrica contatti</h1>
         <p>Qui sotto è presente la lista contatti registrata nel Database</p>
-            <?php if ( $contatti ) { ?>
+            <?php 
+            if($message) echo printMessage($message["text"],$message["type"]);
+            if ( $contatti ) { ?>
             <table class="table table-striped">
             <thead>
                 <tr>
@@ -30,7 +35,7 @@ $contatti = Contatti::findAll();
                     <td>
                         <a href="dettaglio-contatto.php?id=<?php echo  $contatto["id"] ?>" class="btn btn-success" title="Visualizza"><i class="fas fa-eye"></i></a>
                         <a href="form-contatto.php?id=<?php echo  $contatto["id"] ?>" class="btn btn-info" title="Modifica"><i class="fas fa-pen"></i></a>
-                        <a href="#" class="btn btn-danger" title="Cancella"><i class="fas fa-trash"></i></a>
+                        <a href="delete-contatto.php?id=<?php echo  $contatto["id"] ?>" class="btn btn-danger" title="Cancella"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
                 <?php } ?>
