@@ -26,25 +26,18 @@ class DBTable {
         return $conn;
     }
 
-    public static function findAll() {
+
+    public static function findAll($where = "", $sort = "") {
         $conn = self::connect();
-        $sql = "SELECT * FROM ".static::$databaseTable;
-        
+        $sql = "SELECT * FROM `".static::$databaseTable."`";
+        if($where) $sql .= " WHERE " . $where;
+        if($sort) $sql .= " ORDER BY  ".$sort;
         $result = $conn->query($sql);
         $rows = [];  
-        if ($result->num_rows > 0) {
+        if ($result && $result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
                 $rows[] = $row;
             }
-        }
-        
-
-        if (isset($_GET["debug"])){
-            echo '<br>';
-            print_r($sql);
-            echo '<br>';
-            print_r($rows);
-            echo '<br>';
         }
 
         $conn->close();
@@ -73,6 +66,7 @@ class DBTable {
     }
 
     public static function save($values) {
+        
         $id = $values[static::$primaryKey] ?? "";
         $result = "";
         if ($id) {
@@ -89,10 +83,10 @@ class DBTable {
         unset( $values[static::$primaryKey] );
         $values = " NULL, '".implode("' , '",$values)."'";
         
-        $sql = "INSERT INTO ".static::$databaseTable." ( ". implode(" , ", $keys) .") VALUES ( $values )";
+        $sql = "INSERT INTO `".static::$databaseTable."` ( `". implode("` , `", $keys) ."`) VALUES ( $values )";
         $result = $conn->query($sql);
 
-        return $result;
+        return $result ? $conn->insert_id : false; 
     }
 
     public static function update($values) {
@@ -115,13 +109,20 @@ class DBTable {
         $sql = "UPDATE ".static::$databaseTable." SET ". implode(", ", $update ). " WHERE ".static::$primaryKey."=$id";
         $result = $conn->query($sql);
 
-        return $result;
+        return $result ? $id : false; 
     }
 
     public static function delete($id) {
         $conn = self::connect();    
-        $sql = "DELETE FROM ".static::$databaseTable." WHERE ".static::$primaryKey."=$id";
+        $sql = "DELETE FROM `".static::$databaseTable."` WHERE ".static::$primaryKey."=$id";
         $result = $conn->query($sql);
         return $result;
     }
+    public static function deleteWhere($condition) {
+        $conn = self::connect();    
+        $sql = "DELETE FROM `".static::$databaseTable."` WHERE ".$condition;
+        $result = $conn->query($sql);
+        return $result;
+    }
+
 }

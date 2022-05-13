@@ -1,7 +1,7 @@
 <?php
 include_once("db_table.php");
-class Contatto extends DBTable{
-    public static $databaseTable = "contatti";  
+class ModelNAme extends DBTable{
+    public static $databaseTable = "tableName";  
     public static $primaryKey = "id";  
     public static $attributes = array(
         "id"         => array("value" => "", "label" => "id", "fieldType" => "int", "length" => 11, "type" => "hidden" ),

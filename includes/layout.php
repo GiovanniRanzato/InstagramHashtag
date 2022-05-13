@@ -46,13 +46,14 @@ function printLink($url,$label)
 function printInput($props)
 {  
     $type = isset($props["type"]) ? $props["type"] : "text";
+    $id = isset($props["id"]) ? $props["id"] : "";
     $name = isset($props["name"]) ? $props["name"] : "";
     $label = isset($props["label"]) ? $props["label"] : "";
     $value = isset($props["value"]) ? $props["value"] : "";
     $required = isset($props["required"]) ? $props["required"] : "";
     $checked = isset($props["checked"]) ? $props["checked"] : [];
     $placeholder = isset($props["placeholder"]) ? $props["placeholder"] : "";
-    
+    $rows = isset($props["rows"]) ? $props["rows"] : 3;
     ob_start();
     switch ($type) { 
         case "submit": ?>
@@ -87,6 +88,12 @@ function printInput($props)
                 value="<?php echo $value?>"
                 name="<?php echo $name?>"
             >
+        <?php break;
+        case "textarea": ?>
+            <div class="form-group">
+                <label for="<?php echo $name?>"><?php echo $label ?></label>
+                <textarea class="form-control" id="<?php echo $id ?>" rows="<?php echo $rows ?>" name="<?php echo $name?>"><?php echo $value?></textarea>
+            </div>
         <?php break;
         case "file":
         case "text":
