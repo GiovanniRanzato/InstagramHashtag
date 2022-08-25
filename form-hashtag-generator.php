@@ -51,13 +51,13 @@ $categories = Category::findAll("", "name");
                     <?php if(isset($results)) { ?>
                         <div class="mt-3">
                             <?php 
-                            $reultInput["type"] = "textarea";
-                            $reultInput["name"] = "results";
-                            $reultInput["rows"] = 4;
-                            $reultInput["id"] = "results-input";
-                            $reultInput["value"] = $results;
-                            echo printInput($reultInput); ?>
-                            <button class="btn btn-primary" onclick="copyToClipboard('<?php echo $reultInput['id'] ?>')">Copia testo</button>
+                            $resultInput["type"] = "textarea";
+                            $resultInput["name"] = "results";
+                            $resultInput["rows"] = 4;
+                            $resultInput["id"] = "results-input";
+                            $resultInput["value"] = $results;
+                            echo printInput($resultInput); ?>
+                            <button class="btn btn-primary" onclick="copyToClipboard('<?php echo $resultInput['id'] ?>')">Copia testo</button>
                         </div>
                     <?php }?>
                     
