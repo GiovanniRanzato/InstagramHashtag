@@ -14,6 +14,6 @@ include "includes.php";
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
 
-    <title>Rubrica contatti</title>
+    <title>AppHashtag</title>
 </head>
 <body>
